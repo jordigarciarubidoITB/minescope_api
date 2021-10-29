@@ -12,7 +12,6 @@ import java.util.List;
 public class ServeiItem {
     private final RepositoriItems repoItems;
 
-
     public List<Item> llistarItems(){
         return repoItems.findAll();
     }
@@ -25,13 +24,13 @@ public class ServeiItem {
         return repoItems.save(it);
     }
 
-    public Item modificarUsuari(Item it){
-        Item aux=null;
+    public Item modificarItem(Item it){
+        Item aux = null;
         if(repoItems.existsById(it.getIdItem())) aux= repoItems.save(it);
         return aux;
     }
 
-    public Item eliminarUsuari(int id){
+    public Item eliminarItem(int id){
         Item res= repoItems.findById(id).orElse(null);
         if(res!=null) repoItems.deleteById(id);
         return res;
