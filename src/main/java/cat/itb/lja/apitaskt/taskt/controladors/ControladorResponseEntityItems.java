@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class ControladorResponseEntity {
+public class ControladorResponseEntityItems {
     private final ServeiItem serveiItem;
 
     //si l'id de l'Item no existeix es retorna 404 Not Found

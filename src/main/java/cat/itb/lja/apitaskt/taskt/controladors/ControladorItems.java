@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ControladorTaskt {
+public class ControladorItems {
     private final ServeiItem serveiItem;
 
     @GetMapping("/items")
