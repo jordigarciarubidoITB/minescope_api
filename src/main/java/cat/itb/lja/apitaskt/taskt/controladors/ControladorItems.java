@@ -33,7 +33,6 @@ public class ControladorItems {
         return serveiItem.eliminarItem(id);
     }
 
-    //per modificar un usuari existent
     @PutMapping("/items")
     public Item modificarItem(@RequestBody Item mod){
         return serveiItem.modificarItem(mod);
