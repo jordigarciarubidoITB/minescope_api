@@ -1,26 +1,29 @@
 # TASKT API DOCUMENTATION
 Esta API ha sido desarrollada por LJA Development, su enfoque es para la APP/WEB TASKT.
 
-Su funcion principal es ser el puente entre la BBDD, que almacenara la informacion y la herramienta WEB.
+Su función principal es ser el puente entre la BBDD, que almacenará la información y la herramienta WEB.
 
-En su version actual permite almacenar, modificar y eliminar datos en su version local de la BBDD.
+En su versión actual permite almacenar, modificar y eliminar datos en su versión local de la BBDD.
 
 ## PARAMETERS OF ITEM
-**int** - idItem: Variable identificadora de cada item.
+**int** - idItem: Variable identificadora de cada ítem.
 
-**String** - nomItem: Nombre que se le da al item.
+**String** - nomItem: Nombre que se le da al ítem.
 
-**Boolean** - isChecked: Variable que indica si el elemento esta realizado o no.
-
+**Boolean** - isChecked: Variable que indica si el elemento está realizado o no.
 
 ## ENDPOINTS
-**Per llegir tots els items:** @GetMapping(“/items”). Devuelve un array de JSON, en cada JSON estaran los 3 parametros de el item.
+**Per llegir tots els items:** @GetMapping(“/items”). Devuelve un array de JSON, en cada JSON estarán los 3 parámetros del ítem.
 
-**Per consultar un item per id:** @GetMapping(“/items/{idItem}”). Devuelve un JSON, este sera el item con la id indicada en al busqueda.
+**Per consultar un item per id:** @GetMapping(“/items/{idItem}”). Devuelve un JSON, este será el ítem con la id indicada en la búsqueda.
 
-**Per crear un item:** @PostMapping(“/items”). Necesita que se le pasen los 3 parametros de un item.
+**Per crear un item:** @PostMapping(“/items”). Necesita que se le pasen los 3 parámetros de un ítem.
 
-**Per modificar un item per id:** @PutMapping(“/items/{idItem}”). Se le pasan los 3 parametros de un item, pero en el campo identificador se le pasa el valor de el que queremos modificar.
+**Per modificar un item per id:** @PutMapping(“/items/{idItem}”). Se le pasan los 3 parámetros de un ítem, pero en el campo identificador se le pasa el valor de el que queremos modificar.
 
-**Per eliminar un item per id:** @DeleteMapping(“/items/{idItem}). Se le pasa el identificador de el item a eliminar.
+**Per eliminar un item per id:** @DeleteMapping(“/items/{idItem}). Se le pasa el identificador del ítem a eliminar.
 
+.
+<p align="center">
+  <img src="https://github.com/albertponsmarques/TASKT_api/blob/master/LOGOv2.png">
+</p>
