@@ -13,15 +13,15 @@ En su versión actual permite almacenar, modificar y eliminar datos en su versi�
 **Boolean** - isChecked: Variable que indica si el elemento está realizado o no.
 
 ## ENDPOINTS
-**Per llegir tots els items:** @GetMapping(“/items”). Devuelve un array de JSON, en cada JSON estarán los 3 parámetros del ítem.
+**Per llegir tots els items:** @GetMapping(“/todoitems”). Devuelve un array de JSON, en cada JSON estarán los 3 parámetros del ítem.
 
-**Per consultar un item per id:** @GetMapping(“/items/{idItem}”). Devuelve un JSON, este será el ítem con la id indicada en la búsqueda.
+**Per consultar un item per id:** @GetMapping(“/todoitems/{idItem}”). Devuelve un JSON, este será el ítem con la id indicada en la búsqueda.
 
 **Per crear un item:** @PostMapping(“/items”). Necesita que se le pasen los 3 parámetros de un ítem.
 
-**Per modificar un item per id:** @PutMapping(“/items/{idItem}”). Se le pasan los 3 parámetros de un ítem, pero en el campo identificador se le pasa el valor de el que queremos modificar.
+**Per modificar un item per id:** @PutMapping(“/todoitems/{idItem}”). Se le pasan los 3 parámetros de un ítem, pero en el campo identificador se le pasa el valor de el que queremos modificar.
 
-**Per eliminar un item per id:** @DeleteMapping(“/items/{idItem}). Se le pasa el identificador del ítem a eliminar.
+**Per eliminar un item per id:** @DeleteMapping(“/todoitems/{idItem}). Se le pasa el identificador del ítem a eliminar.
 
 .
 <p align="center">
