@@ -34,9 +34,9 @@ public class ControladorResponseEntityItems {
         return new ResponseEntity<Item>(res, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/todoitems/{id}")
-    public ResponseEntity<?> eliminarItem(@PathVariable int id) {
-        Item res = serveiItem.eliminarItem(id);
+    @DeleteMapping("/todoitems/{idItem}")
+    public ResponseEntity<?> eliminarItem(@PathVariable int idItem) {
+        Item res = serveiItem.eliminarItem(idItem);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.noContent().build();
     }
