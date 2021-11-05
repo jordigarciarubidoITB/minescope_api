@@ -21,8 +21,8 @@ public class ControladorResponseEntityItems {
 
     //si l'id de l'Item no existeix es retorna 404 Not Found
     @GetMapping("/todoitems/{idItem}")
-    public ResponseEntity<?> consultarItem(@PathVariable int id) {
-        Item res = serveiItem.consultarItem(id);
+    public ResponseEntity<?> consultarItem(@PathVariable int idItem) {
+        Item res = serveiItem.consultarItem(idItem);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(res);
     }
