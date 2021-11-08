@@ -12,7 +12,7 @@ public class Llista {
     private int idLlista;
     private String nomLlista;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "idLLista")
-    private Set<Item> items;
+    //@OneToMany(cascade = CascadeType.REMOVE)
+    //@JoinColumn(name = "idLLista")
+    //private Set<Item> items;
 }
