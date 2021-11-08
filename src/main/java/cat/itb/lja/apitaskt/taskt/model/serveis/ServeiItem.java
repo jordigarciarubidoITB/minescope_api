@@ -5,6 +5,7 @@ import cat.itb.lja.apitaskt.taskt.model.repositoris.RepositoriItems;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,5 +35,15 @@ public class ServeiItem {
         Item res= repoItems.findById(id).orElse(null);
         if(res!=null) repoItems.deleteById(id);
         return res;
+    }
+
+    public List<Item> llistarItemsByIdLlista(int id){
+        List<Item> items = new ArrayList<>();
+        for (int i = 0; i < llistarItems().size(); i++) {
+            if(llistarItems().get(i).getIdLlista() == id){
+                items.add(consultarItem(id));
+            }
+        }
+        return items;
     }
 }

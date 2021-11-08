@@ -7,10 +7,12 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Item {
+public class Llista {
     @Id
-    private int idItem;
     private int idLlista;
-    private String nomItem;
-    private boolean isChecked;
+    private String nomLlista;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "idLLista")
+    private Set<Item> items;
 }
