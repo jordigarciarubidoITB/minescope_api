@@ -10,6 +10,7 @@ import java.util.Set;
 public class Item {
     @Id
     private int idItem;
+    @Id
     private int idLlista;
     private String nomItem;
     private boolean isChecked;

@@ -52,6 +52,12 @@ public class ControladorResponseEntityItems {
 
     //ITEMS
 
+    @GetMapping("/todoitems")
+    public ResponseEntity<?> llistarAllItems() {
+        if (serveiItem.llistarItems() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(serveiItem.llistarItems());
+    }
+
     //si l'id de l'Item no existeix es retorna 404 Not Found
     @GetMapping("/todolists/{idLlista}/todoitems")
     public ResponseEntity<?> llistarItems(@PathVariable int idLlista) {
