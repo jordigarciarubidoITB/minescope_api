@@ -9,11 +9,13 @@ import javax.persistence.*;
 public class Item {
     @Id
     private int idItem;
-    @ManyToOne
-    @JoinColumn(name="idLlista", insertable = false, updatable = false)
     private int idLlista;
     private String nomItem;
+    private int position;
     private boolean isChecked;
 
-
+    @ManyToOne
+    @JoinTable(name = "llista")
+    @JoinColumn(name = "idLlista")
+    private Llista llista;
 }

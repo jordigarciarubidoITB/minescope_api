@@ -41,7 +41,7 @@ public class ServeiItem {
         List<Item> items = new ArrayList<>();
         for (int i = 0; i < llistarItems().size(); i++) {
             if(llistarItems().get(i).getIdLlista() == id){
-                items.add(consultarItem(id));
+                items.add(llistarItems().get(i));
             }
         }
         return items;

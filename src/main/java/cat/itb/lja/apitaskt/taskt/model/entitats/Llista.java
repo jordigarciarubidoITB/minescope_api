@@ -3,7 +3,7 @@ package cat.itb.lja.apitaskt.taskt.model.entitats;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,10 +12,7 @@ public class Llista {
     private int idLlista;
     private String nomLlista;
 
-    @OneToMany(mappedBy = "idLLista")
-    private Set<Item> items;
-
-    //@OneToMany(cascade = CascadeType.REMOVE)
-    //@JoinColumn(name = "idLLista")
-    //private Set<Item> items;
+    @OneToMany(mappedBy = "llista")
+    @JoinTable(name = "item")
+    private List<Item> items;
 }

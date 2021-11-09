@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class ControladorResponseEntityItems {
+public class ControladorTaskt {
     private final ServeiItem serveiItem;
     private final ServeiLlista serveiLlista;
 
