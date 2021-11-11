@@ -13,9 +13,4 @@ public class Item {
     private String nomItem;
     private int position;
     private boolean isChecked;
-
-    @ManyToOne
-    @JoinTable(name = "llista")
-    @JoinColumn(name = "idLlista")
-    private Llista llista;
 }

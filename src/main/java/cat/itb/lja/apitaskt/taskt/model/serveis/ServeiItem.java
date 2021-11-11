@@ -36,14 +36,4 @@ public class ServeiItem {
         if(res!=null) repoItems.deleteById(id);
         return res;
     }
-
-    public List<Item> llistarItemsByIdLlista(int id){
-        List<Item> items = new ArrayList<>();
-        for (int i = 0; i < llistarItems().size(); i++) {
-            if(llistarItems().get(i).getIdLlista() == id){
-                items.add(llistarItems().get(i));
-            }
-        }
-        return items;
-    }
 }

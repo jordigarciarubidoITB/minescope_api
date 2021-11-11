@@ -1,16 +1,19 @@
 package cat.itb.lja.apitaskt.taskt.model.serveis;
 
+import cat.itb.lja.apitaskt.taskt.model.entitats.Item;
 import cat.itb.lja.apitaskt.taskt.model.entitats.Llista;
 import cat.itb.lja.apitaskt.taskt.model.repositoris.RepositoriLlistes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ServeiLlista {
     private final RepositoriLlistes repositoriLlistes;
+    private final ServeiItem serveiItem;
 
     public List<Llista> llistarLlistes(){
         return repositoriLlistes.findAll();
@@ -26,13 +29,23 @@ public class ServeiLlista {
 
     public Llista modificarLlista(Llista ll){
         Llista aux = null;
-        if(repositoriLlistes.existsById(ll.getIdLlista())) aux= repositoriLlistes.save(ll);
+        if(repositoriLlistes.existsById(ll.getIdLlista())){
+            ll.setLlistaItem(consultarLlista(ll.getIdLlista()).getLlistaItem());
+            aux= repositoriLlistes.save(ll);
+        }
         return aux;
     }
 
     public Llista eliminarLlista(int id){
         Llista res= repositoriLlistes.findById(id).orElse(null);
-        if(res!=null) repositoriLlistes.deleteById(id);
+        if(res!=null) {
+            if (res.getLlistaItem() != null) {
+                for (int i = 0; i < res.getLlistaItem().size(); i++) {
+                    serveiItem.eliminarItem(res.getLlistaItem().get(i).getIdItem());
+                }
+            }
+            repositoriLlistes.deleteById(id);
+        }
         return res;
     }
 }

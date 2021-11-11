@@ -50,6 +50,64 @@ public class ControladorTaskt {
         else return ResponseEntity.ok(res);
     }
 
+    @GetMapping("/todolists/{idLlista}/todoitems")
+    public ResponseEntity<?> llistarItemsLlista(@PathVariable int idLlista) {
+        Llista res = serveiLlista.consultarLlista(idLlista);
+        if (res == null) return ResponseEntity.notFound().build();
+        else{
+            return ResponseEntity.ok(res.getLlistaItem());
+        }
+    }
+
+    @GetMapping("/todolists/{idLlista}/todoitems/{idItem}")
+    public ResponseEntity<?> consultarItemLlista(@PathVariable int idLlista, @PathVariable int idItem) {
+        Llista res = serveiLlista.consultarLlista(idLlista);
+        Item res2 = serveiItem.consultarItem(idItem);
+        if (res == null) return ResponseEntity.notFound().build();
+        else{
+            if (res2 == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("/todolists/{idLlista}/todoitems")
+    public ResponseEntity<?> crearItem(@PathVariable int idLlista, @RequestBody Item nou){
+        Llista res = serveiLlista.consultarLlista(idLlista);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            if (nou.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
+            else {
+                Item res2 = serveiItem.afegirItem(nou);
+                return new ResponseEntity<Item>(res2, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("/todolists/{idLlista}/todoitems")
+    public ResponseEntity<?> modificarItem(@PathVariable int idLlista,@RequestBody Item mod) {
+        Llista res = serveiLlista.consultarLlista(idLlista);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            if (mod.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
+            else {
+                Item res2 = serveiItem.modificarItem(mod);
+                if (res2 == null) return ResponseEntity.notFound().build();
+                else return ResponseEntity.ok(res2);}
+        }
+    }
+
+    @DeleteMapping("/todolists/{idLlista}/todoitems/{idItem}")
+    public ResponseEntity<?> eliminarItem(@PathVariable int idLlista,@PathVariable int idItem) {
+        Llista res = serveiLlista.consultarLlista(idLlista);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            Item res2 = serveiItem.eliminarItem(idItem);
+            if (res2 == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
+    }
+
     //ITEMS
 
     @GetMapping("/todoitems")
@@ -58,43 +116,5 @@ public class ControladorTaskt {
         else return ResponseEntity.ok(serveiItem.llistarItems());
     }
 
-    //si l'id de l'Item no existeix es retorna 404 Not Found
-    @GetMapping("/todolists/{idLlista}/todoitems")
-    public ResponseEntity<?> llistarItems(@PathVariable int idLlista) {
-        Llista res = serveiLlista.consultarLlista(idLlista);
-        if (res == null) return ResponseEntity.notFound().build();
-        else{
-            if (serveiItem.llistarItemsByIdLlista(idLlista) == null) return ResponseEntity.notFound().build();
-            else return ResponseEntity.ok(serveiItem.llistarItemsByIdLlista(idLlista));
-        }
-    }
-
-    //si l'id de l'Item no existeix es retorna 404 Not Found
-    @GetMapping("/todoitems/{idItem}")
-    public ResponseEntity<?> consultarItem(@PathVariable int idItem) {
-        Item res = serveiItem.consultarItem(idItem);
-        if (res == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(res);
-    }
-
-    //si es pot crear es retorna CREATED
-    @PostMapping("/todoitems")
-    public ResponseEntity<?> crearItem(@RequestBody Item nou){
-        Item res=serveiItem.afegirItem(nou);
-        return new ResponseEntity<Item>(res, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/todoitems/{idItem}")
-    public ResponseEntity<?> eliminarItem(@PathVariable int idItem) {
-        Item res = serveiItem.eliminarItem(idItem);
-        if (res == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/todoitems")
-    public ResponseEntity<?> modificarItem(@RequestBody Item mod) {
-        Item res = serveiItem.modificarItem(mod);
-        if (res == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(res);
-    }
+    //
 }
