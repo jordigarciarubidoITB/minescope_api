@@ -14,6 +14,7 @@ import static javax.persistence.CascadeType.ALL;
 @Entity
 public class Llista {
     @Id
+    @GeneratedValue
     private int idLlista;
     private String nomLlista;
 

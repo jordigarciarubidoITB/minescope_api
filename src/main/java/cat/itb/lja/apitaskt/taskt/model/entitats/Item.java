@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Item {
     @Id
+    @GeneratedValue
     private int idItem;
     private int idLlista;
     private String nomItem;
