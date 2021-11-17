@@ -84,16 +84,16 @@ public class ControladorTaskt {
         }
     }
 
-    @PutMapping("/todolists/{idLlista}/todoitems")
-    public ResponseEntity<?> modificarItem(@PathVariable int idLlista,@RequestBody Item mod) {
+    @PutMapping("/todolists/{idLlista}/todoitems/{idItem}")
+    public ResponseEntity<?> modificarItem(@PathVariable int idLlista,@PathVariable int idItem) {
         Llista res = serveiLlista.consultarLlista(idLlista);
-        if (res == null) return ResponseEntity.notFound().build();
+        Item res2 = serveiItem.consultarItem(idItem);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (mod.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
+            if (res2.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
             else {
-                Item res2 = serveiItem.modificarItem(mod);
-                if (res2 == null) return ResponseEntity.notFound().build();
-                else return ResponseEntity.ok(res2);}
+                Item res3 = serveiItem.modificarItem(idItem);
+                return ResponseEntity.ok(res3);}
         }
     }
 

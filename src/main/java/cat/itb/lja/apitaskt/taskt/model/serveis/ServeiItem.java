@@ -25,10 +25,12 @@ public class ServeiItem {
         return repoItems.save(it);
     }
 
-    public Item modificarItem(Item it){
-        Item aux = null;
-        if(repoItems.existsById(it.getIdItem())) aux= repoItems.save(it);
-        return aux;
+    public Item modificarItem(int id_item){
+        Item aux = repoItems.getById(id_item);
+        Item auxMod = null;
+        aux.setChecked(!aux.isChecked());
+        if(repoItems.existsById(id_item)) auxMod= repoItems.save(aux);
+        return auxMod;
     }
 
     public Item eliminarItem(int id){
