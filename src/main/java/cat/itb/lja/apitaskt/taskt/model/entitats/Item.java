@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Entity
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue (generator = "item_sequence")
+    @SequenceGenerator(name="item_sequence", sequenceName = "db_item_sequence", allocationSize = 1)
     private int idItem;
     private int idLlista;
     private String nomItem;
