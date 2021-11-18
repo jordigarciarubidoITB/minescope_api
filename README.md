@@ -3,7 +3,7 @@ Esta API ha sido desarrollada por LJA Development, su enfoque es para la APP/WEB
 
 Su función principal es ser el puente entre la BBDD, que almacenará la información y la herramienta WEB.
 
-En su versión actual permite almacenar, modificar y eliminar datos en su versión local de la BBDD.
+En su versión actual permite almacenar, modificar y eliminar datos en cloud.
 
 ## PARAMETERS OF ITEM
 **int** - idItem: Variable identificadora de cada ítem.
