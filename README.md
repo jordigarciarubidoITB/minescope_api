@@ -13,15 +13,27 @@ En su versión actual permite almacenar, modificar y eliminar datos en su versi�
 **Boolean** - isChecked: Variable que indica si el elemento está realizado o no.
 
 ## ENDPOINTS
-**Per llegir tots els items:** @GetMapping(“/todoitems”). Devuelve un array de JSON, en cada JSON estarán los 3 parámetros del ítem.
+**Per veure totes les llistes:** @GetMapping(“/todolists”). Devuelve un array de JSON, en cada JSON estarán los parámetros de la lista.
 
-**Per consultar un item per id:** @GetMapping(“/todoitems/{idItem}”). Devuelve un JSON, este será el ítem con la id indicada en la búsqueda.
+**Per crear una llista:** @PostMapping(“/todolists”). Introdueix JSON, pasando los parámetros de la lista.
 
-**Per crear un item:** @PostMapping(“/items”). Necesita que se le pasen los 3 parámetros de un ítem.
+**Per actualitzar una llista:** @PutMapping(“/todolists”). Introdueix un JSON, pasando los parámetros de la lista para ser actualizada, debes introducir su id en el JSON.
 
-**Per modificar un item per id:** @PutMapping(“/todoitems/{idItem}”). Se le pasan los 3 parámetros de un ítem, pero en el campo identificador se le pasa el valor de el que queremos modificar.
+**Per eliminar una llista :** @DeleteMapping(“/todolists/{idLlista}”). Devuelve un JSON, estarán los parámetros de la lista.
 
-**Per eliminar un item per id:** @DeleteMapping(“/todoitems/{idItem}). Se le pasa el identificador del ítem a eliminar.
+**Per veure una llista en concret:** @GetMapping(“/todolists/{idLlista}”). Devuelve un JSON, estarán los parámetros de la lista.
+
+**Per consultar items d'una llista:** @GetMapping(“/todolists/{idLlista}/todoitems”).
+
+**Per consultar items per id:** @GetMapping(“/todolists/{idLlista}/todoitems/{idItem}”).
+
+**Per crear un item:** @GetMapping(“/todolists/{idLlista}/todoitems}”). Necesita que se le pasen los 3 parámetros de un ítem.
+
+**Per actualitzar un item:** @PutMapping(“/todolists/{idLlista}/todoitems/{idItem}”). Necesita que se le pasen los 3 parámetros de un ítem.
+
+**Per eliminar un item:** @DeleteMapping(“/todolists/{idLlista}/todoitems/{idItem}”).
+
+
 
 .
 <p align="center">
