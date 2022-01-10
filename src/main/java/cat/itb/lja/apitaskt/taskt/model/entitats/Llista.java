@@ -1,7 +1,6 @@
 package cat.itb.lja.apitaskt.taskt.model.entitats;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -17,6 +16,7 @@ public class Llista {
     @GeneratedValue (generator = "list_sequence")
     @SequenceGenerator(name="list_sequence", sequenceName = "db_list_sequence", allocationSize = 1)
     private int idLlista;
+    private int idUsuari;
     private String nomLlista;
 
     @OneToMany(fetch = FetchType.LAZY)

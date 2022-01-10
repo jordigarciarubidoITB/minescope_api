@@ -2,8 +2,10 @@ package cat.itb.lja.apitaskt.taskt.controladors;
 
 import cat.itb.lja.apitaskt.taskt.model.entitats.Item;
 import cat.itb.lja.apitaskt.taskt.model.entitats.Llista;
+import cat.itb.lja.apitaskt.taskt.model.entitats.Usuari;
 import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiItem;
 import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiLlista;
+import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiUsuari;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ControladorTaskt {
     private final ServeiItem serveiItem;
     private final ServeiLlista serveiLlista;
+    private final ServeiUsuari serveiUsuari;
 
     //LLISTES
 
@@ -116,5 +119,18 @@ public class ControladorTaskt {
         else return ResponseEntity.ok(serveiItem.llistarItems());
     }
 
+    //USUARIS
+
+    @GetMapping("/todousers")
+    public ResponseEntity<?> llistarAllUsers() {
+        if (serveiUsuari.llistarUsuaris() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(serveiUsuari.llistarUsuaris());
+    }
+
+    @PostMapping("/todousers")
+    public ResponseEntity<?> crearUsuari(@RequestBody Usuari nou){
+        Usuari res = serveiUsuari.afegirUsuari(nou);
+        return new ResponseEntity<Usuari>(res, HttpStatus.CREATED);
+    }
     //
 }
