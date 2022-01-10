@@ -11,8 +11,8 @@ import java.util.List;
 @Entity
 public class Usuari{
     @Id
-    @GeneratedValue (generator = "item_sequence")
-    @SequenceGenerator(name="item_sequence", sequenceName = "db_item_sequence", allocationSize = 1)
+    @GeneratedValue (generator = "user_sequence")
+    @SequenceGenerator(name="user_sequence", sequenceName = "db_user_sequence", allocationSize = 1)
     private int idUsuari;
     private String nomUsuari;
     private String password;
