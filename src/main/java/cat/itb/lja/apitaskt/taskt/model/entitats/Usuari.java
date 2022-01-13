@@ -14,6 +14,7 @@ public class Usuari{
     @GeneratedValue (generator = "user_sequence")
     @SequenceGenerator(name="user_sequence", sequenceName = "db_user_sequence", allocationSize = 1)
     private int idUsuari;
+    @Column(unique = true)
     private String nomUsuari;
     private String password;
 
