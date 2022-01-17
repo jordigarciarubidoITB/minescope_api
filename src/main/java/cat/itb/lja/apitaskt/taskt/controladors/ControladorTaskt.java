@@ -73,11 +73,8 @@ public class ControladorTaskt {
         Usuari res = serveiUsuari.consultarUsuari(idUsuari);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            if (nou.getIdUsuari() != idUsuari) return ResponseEntity.notFound().build();
-            else {
-                Llista res2 = serveiLlista.afegirLlista(nou);
-                return new ResponseEntity<Llista>(res2, HttpStatus.CREATED);
-            }
+            Llista res2 = serveiLlista.afegirLlista(nou);
+            return new ResponseEntity<Llista>(res2, HttpStatus.CREATED);
         }
     }
 
