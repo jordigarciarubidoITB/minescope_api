@@ -1,7 +1,7 @@
-package cat.itb.lja.apitaskt.taskt.model.serveis;
+package cat.itb.minescope.model.serveis;
 
-import cat.itb.lja.apitaskt.taskt.model.entitats.Usuari;
-import cat.itb.lja.apitaskt.taskt.model.repositoris.RepositoriUsuaris;
+import cat.itb.minescope.model.entitats.Usuari;
+import cat.itb.minescope.model.repositoris.RepositoriUsuaris;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

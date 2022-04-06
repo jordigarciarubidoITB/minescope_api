@@ -1,4 +1,4 @@
-package cat.itb.lja.apitaskt.taskt.model.entitats;
+package cat.itb.minescope.model.entitats;
 
 import lombok.Data;
 

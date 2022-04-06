@@ -1,4 +1,4 @@
-package cat.itb.lja.apitaskt.taskt.model.entitats;
+package cat.itb.minescope.model.entitats;
 
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -6,8 +6,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Data
 @Entity

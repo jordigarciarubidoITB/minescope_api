@@ -1,11 +1,11 @@
-package cat.itb.lja.apitaskt.taskt.controladors;
+package cat.itb.minescope.controladors;
 
-import cat.itb.lja.apitaskt.taskt.model.entitats.Item;
-import cat.itb.lja.apitaskt.taskt.model.entitats.Llista;
-import cat.itb.lja.apitaskt.taskt.model.entitats.Usuari;
-import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiItem;
-import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiLlista;
-import cat.itb.lja.apitaskt.taskt.model.serveis.ServeiUsuari;
+import cat.itb.minescope.model.entitats.Item;
+import cat.itb.minescope.model.entitats.Llista;
+import cat.itb.minescope.model.serveis.ServeiItem;
+import cat.itb.minescope.model.serveis.ServeiLlista;
+import cat.itb.minescope.model.serveis.ServeiUsuari;
+import cat.itb.minescope.model.entitats.Usuari;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class ControladorTaskt {
+public class ControladorMinescope {
     private final ServeiItem serveiItem;
     private final ServeiLlista serveiLlista;
     private final ServeiUsuari serveiUsuari;

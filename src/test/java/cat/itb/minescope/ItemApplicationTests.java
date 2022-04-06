@@ -1,4 +1,4 @@
-package cat.itb.lja.apitaskt.taskt;
+package cat.itb.minescope;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

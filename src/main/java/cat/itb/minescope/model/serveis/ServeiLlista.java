@@ -1,12 +1,10 @@
-package cat.itb.lja.apitaskt.taskt.model.serveis;
+package cat.itb.minescope.model.serveis;
 
-import cat.itb.lja.apitaskt.taskt.model.entitats.Item;
-import cat.itb.lja.apitaskt.taskt.model.entitats.Llista;
-import cat.itb.lja.apitaskt.taskt.model.repositoris.RepositoriLlistes;
+import cat.itb.minescope.model.entitats.Llista;
+import cat.itb.minescope.model.repositoris.RepositoriLlistes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
