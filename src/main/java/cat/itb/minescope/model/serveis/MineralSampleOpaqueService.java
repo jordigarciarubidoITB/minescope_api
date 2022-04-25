@@ -1,10 +1,7 @@
 package cat.itb.minescope.model.serveis;
 
-import cat.itb.minescope.model.entitats.Llista;
 import cat.itb.minescope.model.entitats.MineralSampleOpaque;
-import cat.itb.minescope.model.repositoris.MineralOpaqueRepository;
 import cat.itb.minescope.model.repositoris.MineralSampleOpaqueRepository;
-import cat.itb.minescope.model.repositoris.RepositoriLlistes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
