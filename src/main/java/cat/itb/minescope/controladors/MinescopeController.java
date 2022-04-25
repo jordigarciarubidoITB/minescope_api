@@ -12,9 +12,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class MinescopeController {
-    private final ServeiItem serveiItem;
-    private final ServeiLlista serveiLlista;
-    private final ServeiUsuari serveiUsuari;
     private final MineralOpaqueService mineralOpaque;
     private final MineralSampleOpaqueService mineralSampleOpaque;
     private final MineralTransparentService mineralTransparentService;
