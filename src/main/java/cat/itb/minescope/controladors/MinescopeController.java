@@ -1,11 +1,7 @@
 package cat.itb.minescope.controladors;
 
-import cat.itb.minescope.model.entitats.Item;
-import cat.itb.minescope.model.entitats.Llista;
-import cat.itb.minescope.model.serveis.ServeiItem;
-import cat.itb.minescope.model.serveis.ServeiLlista;
-import cat.itb.minescope.model.serveis.ServeiUsuari;
-import cat.itb.minescope.model.entitats.Usuari;
+import cat.itb.minescope.model.entitats.*;
+import cat.itb.minescope.model.serveis.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,33 +13,95 @@ public class MinescopeController {
     private final ServeiItem serveiItem;
     private final ServeiLlista serveiLlista;
     private final ServeiUsuari serveiUsuari;
+    private final MineralOpaqueService mineralOpaque;
+    private final MineralSampleOpaqueService mineralSampleOpaque;
+    private final MineralTransparentService mineralTransparentService;
+    private final MineralSampleTransparentService mineralSampleTransparentService;
 
-    //USUARIS
-
-    @GetMapping("/todousers")
-    public ResponseEntity<?> llistarAllUsers() {
-        if (serveiUsuari.llistarUsuaris() == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(serveiUsuari.llistarUsuaris());
+    //OPAQUE MINERALS
+    @GetMapping("/opaqueminerals")
+    public ResponseEntity<?> listOpaqueMinerals() {
+        if (mineralOpaque.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralOpaque.listOpaqueMinerals());
     }
 
-    @PostMapping("/todousers")
-    public ResponseEntity<?> crearUsuari(@RequestBody Usuari nou){
-        Usuari res = serveiUsuari.afegirUsuari(nou);
-        return new ResponseEntity<Usuari>(res, HttpStatus.CREATED);
+    @PostMapping("/opaqueminerals")
+    public ResponseEntity<?> createOpaqueMineral(@RequestBody MineralOpaque mo){
+        MineralOpaque res = mineralOpaque.addOpaqueMineral(mo);
+        return new ResponseEntity<MineralOpaque>(res, HttpStatus.CREATED);
     }
 
-    @GetMapping("/todousers/{idUsuari}")
-    public ResponseEntity<?> consultarUsuari(@PathVariable int idUsuari) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
+    @GetMapping("/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> checkOpaqueMineral(@PathVariable int idMineral) {
+        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(res);
     }
 
-    @DeleteMapping("/todousers/{idUsuari}")
-    public ResponseEntity<?> eliminarUsuari(@PathVariable int idUsuari) {
-        Usuari res = serveiUsuari.eliminarUsuari(idUsuari);
+    @DeleteMapping("/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> deleteOpaqueMineral(@PathVariable int idMineral) {
+        MineralOpaque res = mineralOpaque.deleteOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.noContent().build();
+    }
+
+    //OPAQUE MINERAL SAMPLES
+    @GetMapping("/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> listOpaqueSamples(@PathVariable int idMineral) {
+        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.ok(res.getOpaqueSamplesList());
+        }
+    }
+
+    @GetMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> checkOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaque res1 = mineralOpaque.checkOpaqueMineral(idMineral);
+        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+        if (res1 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2 == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> createOpaqueSample(@PathVariable int idMineral, @RequestBody MineralSampleOpaque mso){
+        MineralOpaque res2 = mineralOpaque.checkOpaqueMineral(idMineral);
+        if (res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaque res3 = mineralSampleOpaque.addOpaqueSample(mso);
+                return new ResponseEntity<MineralSampleOpaque>(res3, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> modifyOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
+        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaque res3 = mineralSampleOpaque.modifyOpaqueSample(res2);
+                return ResponseEntity.ok(res3);}
+        }
+    }
+
+    @DeleteMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> deleteOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
+        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mineralSampleOpaque.deleteOpaqueSample(idSample) == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
     }
 
     //LLISTES
