@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MinescopeController {
@@ -104,128 +106,89 @@ public class MinescopeController {
         }
     }
 
-    //LLISTES
-
-    @GetMapping("/todousers/{idUsuari}/todolists")
-    public ResponseEntity<?> llistarLlista(@PathVariable int idUsuari) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        if (res == null) return ResponseEntity.notFound().build();
-        else{
-            return ResponseEntity.ok(res.getLlistaLlista());
-        }
+    //TRANSPARENT MINERALS
+    @GetMapping("/transparentminerals")
+    public ResponseEntity<?> listTransparentMinerals() {
+        if (mineralTransparentService.listTransparentMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralTransparentService.listTransparentMinerals());
     }
 
-    @GetMapping("/todousers/{idUsuari}/todolists/{idLlista}")
-    public ResponseEntity<?> consultarLlista(@PathVariable int idUsuari, @PathVariable int idLlista) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
+    @GetMapping("/transparentminerals/{id}")
+    public ResponseEntity<?> checkTransparentMineral(@PathVariable int id) {
+        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(id);
         if (res == null) return ResponseEntity.notFound().build();
-        else{
-            if (res2 == null) return ResponseEntity.notFound().build();
-            else return ResponseEntity.ok(res2);
-        }
+        else return ResponseEntity.ok(res);
     }
 
-    @PostMapping("/todousers/{idUsuari}/todolists")
-    public ResponseEntity<?> crearLlista(@PathVariable int idUsuari, @RequestBody Llista nou){
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
+    @PostMapping("/transparentminerals")
+    public ResponseEntity<?> createTransparentMineral(@RequestBody MineralTransparent newMineral){
+        MineralTransparent res = mineralTransparentService.addTransparentMinerals(newMineral);
+        return new ResponseEntity<MineralTransparent>(res, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/transparentminerals/{id}")
+    public ResponseEntity<?> deleteTransparentMineral(@PathVariable int id) {
+        MineralTransparent res = mineralTransparentService.deleteTransparentMineral(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.noContent().build();
+    }
+
+    //TRANSPARENT MINERALS SAMPLES
+    @GetMapping("/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> listTransparentSamples(@PathVariable int idMineral) {
+        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            nou.setIdUsuari(idUsuari);
-            Llista res2 = serveiLlista.afegirLlista(nou);
-            return new ResponseEntity<Llista>(res2, HttpStatus.CREATED);
+            return ResponseEntity.ok(res.getSampleList());
         }
     }
 
-    @DeleteMapping("/todousers/{idUsuari}/todolists/{idLlista}")
-    public ResponseEntity<?> eliminarLlista(@PathVariable int idUsuari,@PathVariable int idLlista) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        if (res == null) return ResponseEntity.notFound().build();
+    @GetMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> checkTransparentSample(@PathVariable int idMineral, @PathVariable int id) {
+        MineralTransparent res1 = mineralTransparentService.checkTransparentMinerals(idMineral);
+        MineralSampleTransparent res2 = mineralSampleTransparentService.checkTransparentSample(id);
+        if (res1 == null) return ResponseEntity.notFound().build();
         else {
-            Llista res2 = serveiLlista.eliminarLlista(idLlista);
             if (res2 == null) return ResponseEntity.notFound().build();
-            else return ResponseEntity.noContent().build();
-        }
-    }
-
-    //@PutMapping("/todolists")
-    //public ResponseEntity<?> modificarLlista(@RequestBody Llista mod) {
-    //    Llista res = serveiLlista.modificarLlista(mod);
-    //    if (res == null) return ResponseEntity.notFound().build();
-    //    else return ResponseEntity.ok(res);
-    //}
-
-    @GetMapping("/todousers/{idUsuari}/todolists/{idLlista}/todoitems")
-    public ResponseEntity<?> llistarItemsLlista(@PathVariable int idUsuari, @PathVariable int idLlista) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
-        if (res == null) return ResponseEntity.notFound().build();
-        else{
-            if (res2 == null) return ResponseEntity.notFound().build();
-            else {
-                return ResponseEntity.ok(res2.getLlistaItem());
-            }
-        }
-    }
-
-    @GetMapping("/todousers/{idUsuari}/todolists/{idLlista}/todoitems/{idItem}")
-    public ResponseEntity<?> consultarItemLlista(@PathVariable int idUsuari,@PathVariable int idLlista, @PathVariable int idItem) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
-        Item res3 = serveiItem.consultarItem(idItem);
-        if (res == null) return ResponseEntity.notFound().build();
-        else{
-            if (res2 == null) return ResponseEntity.notFound().build();
-            else {
-                if (res3 == null) return ResponseEntity.notFound().build();
-                return ResponseEntity.ok(res3);
-            }
+            return ResponseEntity.ok(res2);
         }
     }
 
     //si es pot crear es retorna CREATED
-    @PostMapping("/todousers/{idUsuari}/todolists/{idLlista}/todoitems")
-    public ResponseEntity<?> crearItem(@PathVariable int idUsuari, @PathVariable int idLlista, @RequestBody Item nou){
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
+    @PostMapping("/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> createTransparentSample(@PathVariable int idMineral, @RequestBody MineralSampleTransparent newSample){
+        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            if (res2 == null) return ResponseEntity.notFound().build();
+            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
             else {
-                if (nou.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
-                else {
-                    Item res3 = serveiItem.afegirItem(nou);
-                    return new ResponseEntity<Item>(res3, HttpStatus.CREATED);
-                }
+                MineralSampleTransparent res2 = mineralSampleTransparentService.addTransparentSample(newSample);
+                return new ResponseEntity<MineralSampleTransparent>(res2, HttpStatus.CREATED);
             }
         }
     }
 
-    @PutMapping("/todousers/{idUsuari}/todolists/{idLlista}/todoitems/{idItem}")
-    public ResponseEntity<?> modificarItem(@PathVariable int idUsuari,@PathVariable int idLlista,@PathVariable int idItem) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
-        Item res3 = serveiItem.consultarItem(idItem);
-        if (res == null || res2 == null || res3 == null) return ResponseEntity.notFound().build();
+    @PutMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> modifyTransparentSample(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
+        MineralSampleTransparent res2 = mineralSampleTransparentService.checkTransparentSample(id);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res3.getIdLlista() != idLlista) return ResponseEntity.notFound().build();
+            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
             else {
-                Item res4 = serveiItem.modificarItem(idItem);
-                return ResponseEntity.ok(res4);}
+                MineralSampleTransparent res3 = mineralSampleTransparentService.modifyTransparentSample(res2);
+                return ResponseEntity.ok(res3);}
         }
     }
 
-    @DeleteMapping("/todousers/{idUsuari}/todolists/{idLlista}/todoitems/{idItem}")
-    public ResponseEntity<?> eliminarItem(@PathVariable int idUsuari, @PathVariable int idLlista,@PathVariable int idItem) {
-        Usuari res = serveiUsuari.consultarUsuari(idUsuari);
-        Llista res2 = serveiLlista.consultarLlista(idLlista);
-        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+    @DeleteMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> deleteTransparentSample(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
         else {
-            Item res3 = serveiItem.eliminarItem(idItem);
-            if (res3 == null) return ResponseEntity.notFound().build();
+            MineralSampleTransparent res2 = mineralSampleTransparentService.deleteTransparentSample(id);
+            if (res2 == null) return ResponseEntity.notFound().build();
             else return ResponseEntity.noContent().build();
         }
     }
-
-
 }
