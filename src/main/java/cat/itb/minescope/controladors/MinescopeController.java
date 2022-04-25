@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class ControladorMinescope {
+public class MinescopeController {
     private final ServeiItem serveiItem;
     private final ServeiLlista serveiLlista;
     private final ServeiUsuari serveiUsuari;
