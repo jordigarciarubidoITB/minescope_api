@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class MineralSampleTransparent {
+public class MineralSampleTransparentEn {
     @Id
     @GeneratedValue(generator = "mineral_sample_transparent_sequence")
     @SequenceGenerator(name="mineral_sample_transparent_sequence", sequenceName = "db_mineral_sample_transparent_sequence", allocationSize = 1)

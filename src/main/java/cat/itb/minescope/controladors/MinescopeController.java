@@ -7,57 +7,65 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class MinescopeController {
-    private final MineralOpaqueService mineralOpaque;
-    private final MineralSampleOpaqueService mineralSampleOpaque;
-    private final MineralTransparentService mineralTransparentService;
-    private final MineralSampleTransparentService mineralSampleTransparentService;
+    private final MineralOpaqueServiceEn mineralOpaqueEn;
+    private final MineralSampleOpaqueServiceEn mineralSampleOpaqueEn;
+    private final MineralTransparentServiceEn mineralTransparentServiceEn;
+    private final MineralSampleTransparentServiceEn mineralSampleTransparentServiceEn;
 
-    //OPAQUE MINERALS
-    @GetMapping("/opaqueminerals")
-    public ResponseEntity<?> listOpaqueMinerals() {
-        if (mineralOpaque.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(mineralOpaque.listOpaqueMinerals());
+    private final MineralOpaqueServiceSp mineralOpaqueSp;
+    private final MineralSampleOpaqueServiceSp mineralSampleOpaqueSp;
+    private final MineralTransparentServiceSp mineralTransparentServiceSp;
+    private final MineralSampleTransparentServiceSp mineralSampleTransparentServiceSp;
+
+    private final MineralOpaqueServiceCa mineralOpaqueCa;
+    private final MineralSampleOpaqueServiceCa mineralSampleOpaqueCa;
+    private final MineralTransparentServiceCa mineralTransparentServiceCa;
+    private final MineralSampleTransparentServiceCa mineralSampleTransparentServiceCa;
+
+    //OPAQUE MINERALS EN
+    @GetMapping("en/opaqueminerals")
+    public ResponseEntity<?> listOpaqueMineralsEn(@PathVariable String language) {
+        if (mineralOpaqueEn.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralOpaqueEn.listOpaqueMinerals());
     }
 
-    @PostMapping("/opaqueminerals")
-    public ResponseEntity<?> createOpaqueMineral(@RequestBody MineralOpaque mo){
-        MineralOpaque res = mineralOpaque.addOpaqueMineral(mo);
-        return new ResponseEntity<MineralOpaque>(res, HttpStatus.CREATED);
+    @PostMapping("en/opaqueminerals")
+    public ResponseEntity<?> createOpaqueMineralEn(@RequestBody MineralOpaqueEn mo){
+        MineralOpaqueEn res = mineralOpaqueEn.addOpaqueMineral(mo);
+        return new ResponseEntity<MineralOpaqueEn>(res, HttpStatus.CREATED);
     }
 
-    @GetMapping("/opaqueminerals/{idMineral}")
-    public ResponseEntity<?> checkOpaqueMineral(@PathVariable int idMineral) {
-        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
+    @GetMapping("en/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> checkOpaqueMineralEn(@PathVariable int idMineral) {
+        MineralOpaqueEn res = mineralOpaqueEn.checkOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(res);
     }
 
-    @DeleteMapping("/opaqueminerals/{idMineral}")
-    public ResponseEntity<?> deleteOpaqueMineral(@PathVariable int idMineral) {
-        MineralOpaque res = mineralOpaque.deleteOpaqueMineral(idMineral);
+    @DeleteMapping("en/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> deleteOpaqueMineralEn(@PathVariable int idMineral) {
+        MineralOpaqueEn res = mineralOpaqueEn.deleteOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.noContent().build();
     }
 
-    //OPAQUE MINERAL SAMPLES
-    @GetMapping("/opaqueminerals/{idMineral}/opaquesamples")
-    public ResponseEntity<?> listOpaqueSamples(@PathVariable int idMineral) {
-        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
+    //OPAQUE MINERAL SAMPLES EN
+    @GetMapping("en/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> listOpaqueSamplesEn(@PathVariable int idMineral) {
+        MineralOpaqueEn res = mineralOpaqueEn.checkOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
             return ResponseEntity.ok(res.getOpaqueSamplesList());
         }
     }
 
-    @GetMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
-    public ResponseEntity<?> checkOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
-        MineralOpaque res1 = mineralOpaque.checkOpaqueMineral(idMineral);
-        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+    @GetMapping("en/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> checkOpaqueSampleEn(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueEn res1 = mineralOpaqueEn.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueEn res2 = mineralSampleOpaqueEn.checkOpaqueSample(idSample);
         if (res1 == null) return ResponseEntity.notFound().build();
         else {
             if (res2 == null) return ResponseEntity.notFound().build();
@@ -66,84 +74,256 @@ public class MinescopeController {
     }
 
     //si es pot crear es retorna CREATED
-    @PostMapping("/opaqueminerals/{idMineral}/opaquesamples")
-    public ResponseEntity<?> createOpaqueSample(@PathVariable int idMineral, @RequestBody MineralSampleOpaque mso){
-        MineralOpaque res2 = mineralOpaque.checkOpaqueMineral(idMineral);
+    @PostMapping("en/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> createOpaqueSampleEn(@PathVariable int idMineral, @RequestBody MineralSampleOpaqueEn mso){
+        MineralOpaqueEn res2 = mineralOpaqueEn.checkOpaqueMineral(idMineral);
         if (res2 == null) return ResponseEntity.notFound().build();
         else {
             if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
             else {
-                MineralSampleOpaque res3 = mineralSampleOpaque.addOpaqueSample(mso);
-                return new ResponseEntity<MineralSampleOpaque>(res3, HttpStatus.CREATED);
+                MineralSampleOpaqueEn res3 = mineralSampleOpaqueEn.addOpaqueSample(mso);
+                return new ResponseEntity<MineralSampleOpaqueEn>(res3, HttpStatus.CREATED);
             }
         }
     }
 
-    @PutMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
-    public ResponseEntity<?> modifyOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
-        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
-        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+    @PutMapping("en/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> modifyOpaqueSampleEn(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueEn res = mineralOpaqueEn.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueEn res2 = mineralSampleOpaqueEn.checkOpaqueSample(idSample);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
             if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
             else {
-                MineralSampleOpaque res3 = mineralSampleOpaque.modifyOpaqueSample(res2);
+                MineralSampleOpaqueEn res3 = mineralSampleOpaqueEn.modifyOpaqueSample(res2);
                 return ResponseEntity.ok(res3);}
         }
     }
 
-    @DeleteMapping("/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
-    public ResponseEntity<?> deleteOpaqueSample(@PathVariable int idMineral, @PathVariable int idSample) {
-        MineralOpaque res = mineralOpaque.checkOpaqueMineral(idMineral);
-        MineralSampleOpaque res2 = mineralSampleOpaque.checkOpaqueSample(idSample);
+    @DeleteMapping("en/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> deleteOpaqueSampleEn(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueEn res = mineralOpaqueEn.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueEn res2 = mineralSampleOpaqueEn.checkOpaqueSample(idSample);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (mineralSampleOpaque.deleteOpaqueSample(idSample) == null) return ResponseEntity.notFound().build();
+            if (mineralSampleOpaqueEn.deleteOpaqueSample(idSample) == null) return ResponseEntity.notFound().build();
             else return ResponseEntity.noContent().build();
         }
     }
 
-    //TRANSPARENT MINERALS
-    @GetMapping("/transparentminerals")
-    public ResponseEntity<?> listTransparentMinerals() {
-        if (mineralTransparentService.listTransparentMinerals() == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(mineralTransparentService.listTransparentMinerals());
+    //OPAQUE MINERALS SP
+    @GetMapping("sp/opaqueminerals")
+    public ResponseEntity<?> listOpaqueMineralsSp(@PathVariable String language) {
+        if (mineralOpaqueSp.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralOpaqueSp.listOpaqueMinerals());
     }
 
-    @GetMapping("/transparentminerals/{id}")
-    public ResponseEntity<?> checkTransparentMineral(@PathVariable int id) {
-        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(id);
+    @PostMapping("sp/opaqueminerals")
+    public ResponseEntity<?> createOpaqueMineralSp(@RequestBody MineralOpaqueSp mo){
+        MineralOpaqueSp res = mineralOpaqueSp.addOpaqueMineral(mo);
+        return new ResponseEntity<MineralOpaqueSp>(res, HttpStatus.CREATED);
+    }
+
+    @GetMapping("sp/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> checkOpaqueMineralSp(@PathVariable int idMineral) {
+        MineralOpaqueSp res = mineralOpaqueSp.checkOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(res);
     }
 
-    @PostMapping("/transparentminerals")
-    public ResponseEntity<?> createTransparentMineral(@RequestBody MineralTransparent newMineral){
-        MineralTransparent res = mineralTransparentService.addTransparentMinerals(newMineral);
-        return new ResponseEntity<MineralTransparent>(res, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/transparentminerals/{id}")
-    public ResponseEntity<?> deleteTransparentMineral(@PathVariable int id) {
-        MineralTransparent res = mineralTransparentService.deleteTransparentMineral(id);
+    @DeleteMapping("sp/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> deleteOpaqueMineralSp(@PathVariable int idMineral) {
+        MineralOpaqueSp res = mineralOpaqueSp.deleteOpaqueMineral(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.noContent().build();
     }
 
-    //TRANSPARENT MINERALS SAMPLES
-    @GetMapping("/transparentminerals/{idMineral}/transparentsamples")
-    public ResponseEntity<?> listTransparentSamples(@PathVariable int idMineral) {
-        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
+    //OPAQUE MINERAL SAMPLES SP
+    @GetMapping("sp/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> listOpaqueSamplesSp(@PathVariable int idMineral) {
+        MineralOpaqueSp res = mineralOpaqueSp.checkOpaqueMineral(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.ok(res.getOpaqueSamplesList());
+        }
+    }
+
+    @GetMapping("sp/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> checkOpaqueSampleSp(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueSp res1 = mineralOpaqueSp.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueSp res2 = mineralSampleOpaqueSp.checkOpaqueSample(idSample);
+        if (res1 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2 == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("sp/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> createOpaqueSampleSp(@PathVariable int idMineral, @RequestBody MineralSampleOpaqueSp mso){
+        MineralOpaqueSp res2 = mineralOpaqueSp.checkOpaqueMineral(idMineral);
+        if (res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaqueSp res3 = mineralSampleOpaqueSp.addOpaqueSample(mso);
+                return new ResponseEntity<MineralSampleOpaqueSp>(res3, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("sp/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> modifyOpaqueSampleSp(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueSp res = mineralOpaqueSp.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueSp res2 = mineralSampleOpaqueSp.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaqueSp res3 = mineralSampleOpaqueSp.modifyOpaqueSample(res2);
+                return ResponseEntity.ok(res3);}
+        }
+    }
+
+    @DeleteMapping("sp/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> deleteOpaqueSampleSp(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueSp res = mineralOpaqueSp.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueSp res2 = mineralSampleOpaqueSp.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mineralSampleOpaqueSp.deleteOpaqueSample(idSample) == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
+    }
+
+    //OPAQUE MINERALS CA
+    @GetMapping("ca/opaqueminerals")
+    public ResponseEntity<?> listOpaqueMineralsCa(@PathVariable String language) {
+        if (mineralOpaqueCa.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralOpaqueCa.listOpaqueMinerals());
+    }
+
+    @PostMapping("ca/opaqueminerals")
+    public ResponseEntity<?> createOpaqueMineralCa(@RequestBody MineralOpaqueCa mo){
+        MineralOpaqueCa res = mineralOpaqueCa.addOpaqueMineral(mo);
+        return new ResponseEntity<MineralOpaqueCa>(res, HttpStatus.CREATED);
+    }
+
+    @GetMapping("ca/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> checkOpaqueMineralCa(@PathVariable int idMineral) {
+        MineralOpaqueCa res = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(res);
+    }
+
+    @DeleteMapping("ca/opaqueminerals/{idMineral}")
+    public ResponseEntity<?> deleteOpaqueMineralCa(@PathVariable int idMineral) {
+        MineralOpaqueCa res = mineralOpaqueCa.deleteOpaqueMineral(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.noContent().build();
+    }
+
+    //OPAQUE MINERAL SAMPLES CA
+    @GetMapping("ca/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> listOpaqueSamplesCa(@PathVariable int idMineral) {
+        MineralOpaqueCa res = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.ok(res.getOpaqueSamplesList());
+        }
+    }
+
+    @GetMapping("ca/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> checkOpaqueSampleCa(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueCa res1 = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueCa res2 = mineralSampleOpaqueCa.checkOpaqueSample(idSample);
+        if (res1 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2 == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("ca/opaqueminerals/{idMineral}/opaquesamples")
+    public ResponseEntity<?> createOpaqueSampleCa(@PathVariable int idMineral, @RequestBody MineralSampleOpaqueCa mso){
+        MineralOpaqueCa res2 = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        if (res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaqueCa res3 = mineralSampleOpaqueCa.addOpaqueSample(mso);
+                return new ResponseEntity<MineralSampleOpaqueCa>(res3, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("ca/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> modifyOpaqueSampleCa(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueCa res = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueCa res2 = mineralSampleOpaqueCa.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleOpaqueCa res3 = mineralSampleOpaqueCa.modifyOpaqueSample(res2);
+                return ResponseEntity.ok(res3);}
+        }
+    }
+
+    @DeleteMapping("ca/opaqueminerals/{idMineral}/opaquesamples/{idSample}")
+    public ResponseEntity<?> deleteOpaqueSampleCa(@PathVariable int idMineral, @PathVariable int idSample) {
+        MineralOpaqueCa res = mineralOpaqueCa.checkOpaqueMineral(idMineral);
+        MineralSampleOpaqueCa res2 = mineralSampleOpaqueCa.checkOpaqueSample(idSample);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (mineralSampleOpaqueCa.deleteOpaqueSample(idSample) == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
+    }
+
+    //TRANSPARENT MINERALS EN
+    @GetMapping("en/transparentminerals")
+    public ResponseEntity<?> listTransparentMineralsEn() {
+        if (mineralTransparentServiceEn.listTransparentMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralTransparentServiceEn.listTransparentMinerals());
+    }
+
+    @GetMapping("en/transparentminerals/{id}")
+    public ResponseEntity<?> checkTransparentMineralEn(@PathVariable int id) {
+        MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("en/transparentminerals")
+    public ResponseEntity<?> createTransparentMineralEn(@RequestBody MineralTransparentEn newMineral){
+        MineralTransparentEn res = mineralTransparentServiceEn.addTransparentMinerals(newMineral);
+        return new ResponseEntity<MineralTransparentEn>(res, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("en/transparentminerals/{id}")
+    public ResponseEntity<?> deleteTransparentMineralEn(@PathVariable int id) {
+        MineralTransparentEn res = mineralTransparentServiceEn.deleteTransparentMineral(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.noContent().build();
+    }
+
+    //TRANSPARENT MINERALS SAMPLES EN
+    @GetMapping("en/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> listTransparentSamplesEn(@PathVariable int idMineral) {
+        MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
             return ResponseEntity.ok(res.getSampleList());
         }
     }
 
-    @GetMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
-    public ResponseEntity<?> checkTransparentSample(@PathVariable int idMineral, @PathVariable int id) {
-        MineralTransparent res1 = mineralTransparentService.checkTransparentMinerals(idMineral);
-        MineralSampleTransparent res2 = mineralSampleTransparentService.checkTransparentSample(id);
+    @GetMapping("en/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> checkTransparentSampleEn(@PathVariable int idMineral, @PathVariable int id) {
+        MineralTransparentEn res1 = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.checkTransparentSample(id);
         if (res1 == null) return ResponseEntity.notFound().build();
         else {
             if (res2 == null) return ResponseEntity.notFound().build();
@@ -152,38 +332,210 @@ public class MinescopeController {
     }
 
     //si es pot crear es retorna CREATED
-    @PostMapping("/transparentminerals/{idMineral}/transparentsamples")
-    public ResponseEntity<?> createTransparentSample(@PathVariable int idMineral, @RequestBody MineralSampleTransparent newSample){
-        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
+    @PostMapping("en/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> createTransparentSampleEn(@PathVariable int idMineral, @RequestBody MineralSampleTransparentEn newSample){
+        MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
             if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
             else {
-                MineralSampleTransparent res2 = mineralSampleTransparentService.addTransparentSample(newSample);
-                return new ResponseEntity<MineralSampleTransparent>(res2, HttpStatus.CREATED);
+                MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.addTransparentSample(newSample);
+                return new ResponseEntity<MineralSampleTransparentEn>(res2, HttpStatus.CREATED);
             }
         }
     }
 
-    @PutMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
-    public ResponseEntity<?> modifyTransparentSample(@PathVariable int idMineral,@PathVariable int id) {
-        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
-        MineralSampleTransparent res2 = mineralSampleTransparentService.checkTransparentSample(id);
+    @PutMapping("en/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> modifyTransparentSampleEn(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.checkTransparentSample(id);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
             if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
             else {
-                MineralSampleTransparent res3 = mineralSampleTransparentService.modifyTransparentSample(res2);
+                MineralSampleTransparentEn res3 = mineralSampleTransparentServiceEn.modifyTransparentSample(res2);
                 return ResponseEntity.ok(res3);}
         }
     }
 
-    @DeleteMapping("/transparentminerals/{idMineral}/transparentsamples/{id}")
-    public ResponseEntity<?> deleteTransparentSample(@PathVariable int idMineral,@PathVariable int id) {
-        MineralTransparent res = mineralTransparentService.checkTransparentMinerals(idMineral);
+    @DeleteMapping("en/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> deleteTransparentSampleEn(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            MineralSampleTransparent res2 = mineralSampleTransparentService.deleteTransparentSample(id);
+            MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.deleteTransparentSample(id);
+            if (res2 == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
+    }
+
+    //TRANSPARENT MINERALS SP
+    @GetMapping("sp/transparentminerals")
+    public ResponseEntity<?> listTransparentMineralsSp() {
+        if (mineralTransparentServiceSp.listTransparentMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralTransparentServiceSp.listTransparentMinerals());
+    }
+
+    @GetMapping("sp/transparentminerals/{id}")
+    public ResponseEntity<?> checkTransparentMineralSp(@PathVariable int id) {
+        MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("sp/transparentminerals")
+    public ResponseEntity<?> createTransparentMineralSp(@RequestBody MineralTransparentSp newMineral){
+        MineralTransparentSp res = mineralTransparentServiceSp.addTransparentMinerals(newMineral);
+        return new ResponseEntity<MineralTransparentSp>(res, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("sp/transparentminerals/{id}")
+    public ResponseEntity<?> deleteTransparentMineralSp(@PathVariable int id) {
+        MineralTransparentSp res = mineralTransparentServiceSp.deleteTransparentMineral(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.noContent().build();
+    }
+
+    //TRANSPARENT MINERALS SAMPLES SP
+    @GetMapping("sp/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> listTransparentSamplesSp(@PathVariable int idMineral) {
+        MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.ok(res.getSampleList());
+        }
+    }
+
+    @GetMapping("sp/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> checkTransparentSampleSp(@PathVariable int idMineral, @PathVariable int id) {
+        MineralTransparentSp res1 = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.checkTransparentSample(id);
+        if (res1 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2 == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("sp/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> createTransparentSampleSp(@PathVariable int idMineral, @RequestBody MineralSampleTransparentSp newSample){
+        MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.addTransparentSample(newSample);
+                return new ResponseEntity<MineralSampleTransparentSp>(res2, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("sp/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> modifyTransparentSampleSp(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.checkTransparentSample(id);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleTransparentSp res3 = mineralSampleTransparentServiceSp.modifyTransparentSample(res2);
+                return ResponseEntity.ok(res3);}
+        }
+    }
+
+    @DeleteMapping("sp/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> deleteTransparentSampleSp(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.deleteTransparentSample(id);
+            if (res2 == null) return ResponseEntity.notFound().build();
+            else return ResponseEntity.noContent().build();
+        }
+    }
+
+    //TRANSPARENT MINERALS CA
+    @GetMapping("ca/transparentminerals")
+    public ResponseEntity<?> listTransparentMineralsCa() {
+        if (mineralTransparentServiceCa.listTransparentMinerals() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralTransparentServiceCa.listTransparentMinerals());
+    }
+
+    @GetMapping("ca/transparentminerals/{id}")
+    public ResponseEntity<?> checkTransparentMineralCa(@PathVariable int id) {
+        MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("ca/transparentminerals")
+    public ResponseEntity<?> createTransparentMineralCa(@RequestBody MineralTransparentCa newMineral){
+        MineralTransparentCa res = mineralTransparentServiceCa.addTransparentMinerals(newMineral);
+        return new ResponseEntity<MineralTransparentCa>(res, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("ca/transparentminerals/{id}")
+    public ResponseEntity<?> deleteTransparentMineralCa(@PathVariable int id) {
+        MineralTransparentCa res = mineralTransparentServiceCa.deleteTransparentMineral(id);
+        if (res == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.noContent().build();
+    }
+
+    //TRANSPARENT MINERALS SAMPLES CA
+    @GetMapping("ca/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> listTransparentSamplesCa(@PathVariable int idMineral) {
+        MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.ok(res.getSampleList());
+        }
+    }
+
+    @GetMapping("ca/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> checkTransparentSampleCa(@PathVariable int idMineral, @PathVariable int id) {
+        MineralTransparentCa res1 = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.checkTransparentSample(id);
+        if (res1 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2 == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(res2);
+        }
+    }
+
+    //si es pot crear es retorna CREATED
+    @PostMapping("ca/transparentminerals/{idMineral}/transparentsamples")
+    public ResponseEntity<?> createTransparentSampleCa(@PathVariable int idMineral, @RequestBody MineralSampleTransparentCa newSample){
+        MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.addTransparentSample(newSample);
+                return new ResponseEntity<MineralSampleTransparentCa>(res2, HttpStatus.CREATED);
+            }
+        }
+    }
+
+    @PutMapping("ca/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> modifyTransparentSampleCa(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
+        MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.checkTransparentSample(id);
+        if (res == null || res2 == null) return ResponseEntity.notFound().build();
+        else {
+            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            else {
+                MineralSampleTransparentCa res3 = mineralSampleTransparentServiceCa.modifyTransparentSample(res2);
+                return ResponseEntity.ok(res3);}
+        }
+    }
+
+    @DeleteMapping("ca/transparentminerals/{idMineral}/transparentsamples/{id}")
+    public ResponseEntity<?> deleteTransparentSampleCa(@PathVariable int idMineral,@PathVariable int id) {
+        MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
+        if (res == null) return ResponseEntity.notFound().build();
+        else {
+            MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.deleteTransparentSample(id);
             if (res2 == null) return ResponseEntity.notFound().build();
             else return ResponseEntity.noContent().build();
         }

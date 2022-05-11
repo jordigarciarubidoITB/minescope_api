@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class MineralTransparent {
+public class MineralTransparentSp {
     @Id
     @GeneratedValue(generator = "mineral_transparent_sequence")
     @SequenceGenerator(name="mineral_transparent_sequence", sequenceName = "db_transparent_mineral_sequence", allocationSize = 1)
@@ -33,5 +33,5 @@ public class MineralTransparent {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "mineralId")
-    private List<MineralSampleTransparent> sampleList;
+    private List<MineralSampleTransparentSp> sampleList;
 }
