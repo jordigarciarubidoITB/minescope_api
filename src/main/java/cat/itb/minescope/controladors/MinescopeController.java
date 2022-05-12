@@ -27,7 +27,7 @@ public class MinescopeController {
 
     //OPAQUE MINERALS EN
     @GetMapping("en/opaqueminerals")
-    public ResponseEntity<?> listOpaqueMineralsEn(@PathVariable String language) {
+    public ResponseEntity<?> listOpaqueMineralsEn() {
         if (mineralOpaqueEn.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralOpaqueEn.listOpaqueMinerals());
     }
@@ -113,7 +113,7 @@ public class MinescopeController {
 
     //OPAQUE MINERALS SP
     @GetMapping("sp/opaqueminerals")
-    public ResponseEntity<?> listOpaqueMineralsSp(@PathVariable String language) {
+    public ResponseEntity<?> listOpaqueMineralsSp() {
         if (mineralOpaqueSp.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralOpaqueSp.listOpaqueMinerals());
     }
@@ -199,7 +199,7 @@ public class MinescopeController {
 
     //OPAQUE MINERALS CA
     @GetMapping("ca/opaqueminerals")
-    public ResponseEntity<?> listOpaqueMineralsCa(@PathVariable String language) {
+    public ResponseEntity<?> listOpaqueMineralsCa() {
         if (mineralOpaqueCa.listOpaqueMinerals() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralOpaqueCa.listOpaqueMinerals());
     }
