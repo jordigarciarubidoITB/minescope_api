@@ -23,7 +23,7 @@ public class MineralSampleOpaqueSp {
     private String otherMinerals;
     private String shape;
     private String polishingCleavage;
-    private String reflectivity;
+    //private String reflectivity;
     private String polishingHardness;
     private String anisotropism;
     private String interferenceColors;
