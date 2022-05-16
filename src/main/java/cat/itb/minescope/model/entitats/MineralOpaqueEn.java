@@ -12,7 +12,7 @@ public class MineralOpaqueEn {
     @GeneratedValue (generator = "mineralopaque_sequence")
     @SequenceGenerator(name="mineralopaque_sequence", sequenceName = "db_user_sequence", allocationSize = 1)
     private int idMineral;
-    @Column(unique = true)
+    //@Column(unique = true)
     private String name;
     private String chemicalFormula;
     private String color;
