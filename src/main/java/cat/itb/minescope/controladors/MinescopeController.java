@@ -79,7 +79,7 @@ public class MinescopeController {
         MineralOpaqueEn res2 = mineralOpaqueEn.checkOpaqueMineral(idMineral);
         if (res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueEn res3 = mineralSampleOpaqueEn.addOpaqueSample(mso);
                 return new ResponseEntity<MineralSampleOpaqueEn>(res3, HttpStatus.CREATED);
@@ -93,7 +93,7 @@ public class MinescopeController {
         MineralSampleOpaqueEn res2 = mineralSampleOpaqueEn.checkOpaqueSample(idSample);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueEn res3 = mineralSampleOpaqueEn.modifyOpaqueSample(res2);
                 return ResponseEntity.ok(res3);}
@@ -165,7 +165,7 @@ public class MinescopeController {
         MineralOpaqueSp res2 = mineralOpaqueSp.checkOpaqueMineral(idMineral);
         if (res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueSp res3 = mineralSampleOpaqueSp.addOpaqueSample(mso);
                 return new ResponseEntity<MineralSampleOpaqueSp>(res3, HttpStatus.CREATED);
@@ -179,7 +179,7 @@ public class MinescopeController {
         MineralSampleOpaqueSp res2 = mineralSampleOpaqueSp.checkOpaqueSample(idSample);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueSp res3 = mineralSampleOpaqueSp.modifyOpaqueSample(res2);
                 return ResponseEntity.ok(res3);}
@@ -251,7 +251,7 @@ public class MinescopeController {
         MineralOpaqueCa res2 = mineralOpaqueCa.checkOpaqueMineral(idMineral);
         if (res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (mso.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueCa res3 = mineralSampleOpaqueCa.addOpaqueSample(mso);
                 return new ResponseEntity<MineralSampleOpaqueCa>(res3, HttpStatus.CREATED);
@@ -265,7 +265,7 @@ public class MinescopeController {
         MineralSampleOpaqueCa res2 = mineralSampleOpaqueCa.checkOpaqueSample(idSample);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getIdMineral() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueCa res3 = mineralSampleOpaqueCa.modifyOpaqueSample(res2);
                 return ResponseEntity.ok(res3);}

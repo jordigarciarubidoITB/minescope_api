@@ -14,10 +14,10 @@ public class MineralTransparentEn {
     private int id;
 
     @Column(unique = true)
-    private String name;
-    private String relief;
-    private String color;
-    private String pleochroism;
+    private String nom;
+    private String relleu;
+    private String colors;
+    private String pleocroisme;
     private String numberOfCleavageDirections;
     private String angleOfCleavage;
     private String interferenceColorOrder;
