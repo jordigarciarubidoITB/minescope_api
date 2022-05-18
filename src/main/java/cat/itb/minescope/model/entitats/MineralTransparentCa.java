@@ -14,24 +14,24 @@ public class MineralTransparentCa {
     private int id;
 
     @Column(unique = true)
-    private String name;
-    private String relief;
-    private String color;
-    private String pleochroism;
-    private String numberOfCleavageDirections;
-    private String angleOfCleavage;
-    private String interferenceColorOrder;
-    private String extinction;
-    private String twinning;
-    private String interferenceFigure;
-    private String opticalSign;
-    private String chemicalFormula;
-    private String crystalShape;
-    private String alteration;
-    private String zonation;
-    private String cleavage;
+    private String nom;
+    private String relleu;
+    private String colors;
+    private String pleocroisme;
+    private String nom_dir_exfoliacio;
+    private String angle_dir_exfoliacio;
+    private String colors_interferencia;
+    private String extincio;
+    private String maclat;
+    private String figura_interferencia;
+    private String signe_optic;
+    private String formula;
+    private String forma_cristalls;
+    private String alteracio;
+    private String zonacio;
+    private String exfoliacio;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mineralId")
+    @JoinColumn(name = "id_mineral")
     private List<MineralSampleTransparentCa> sampleList;
 }

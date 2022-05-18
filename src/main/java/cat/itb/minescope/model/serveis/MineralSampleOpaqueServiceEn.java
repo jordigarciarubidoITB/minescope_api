@@ -26,7 +26,7 @@ public class MineralSampleOpaqueServiceEn {
 
     public MineralSampleOpaqueEn modifyOpaqueSample(MineralSampleOpaqueEn mso){
         MineralSampleOpaqueEn aux = null;
-        if(repository.existsById(mso.getIdSample())){
+        if(repository.existsById(mso.getId())){
             aux= repository.save(mso);
         }
         return aux;

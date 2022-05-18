@@ -337,7 +337,7 @@ public class MinescopeController {
         MineralTransparentEn res = mineralTransparentServiceEn.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.addTransparentSample(newSample);
                 return new ResponseEntity<MineralSampleTransparentEn>(res2, HttpStatus.CREATED);
@@ -351,7 +351,7 @@ public class MinescopeController {
         MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.checkTransparentSample(id);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentEn res3 = mineralSampleTransparentServiceEn.modifyTransparentSample(res2);
                 return ResponseEntity.ok(res3);}
@@ -423,7 +423,7 @@ public class MinescopeController {
         MineralTransparentSp res = mineralTransparentServiceSp.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.addTransparentSample(newSample);
                 return new ResponseEntity<MineralSampleTransparentSp>(res2, HttpStatus.CREATED);
@@ -437,7 +437,7 @@ public class MinescopeController {
         MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.checkTransparentSample(id);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentSp res3 = mineralSampleTransparentServiceSp.modifyTransparentSample(res2);
                 return ResponseEntity.ok(res3);}
@@ -509,7 +509,7 @@ public class MinescopeController {
         MineralTransparentCa res = mineralTransparentServiceCa.checkTransparentMinerals(idMineral);
         if (res == null) return ResponseEntity.notFound().build();
         else {
-            if (newSample.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.addTransparentSample(newSample);
                 return new ResponseEntity<MineralSampleTransparentCa>(res2, HttpStatus.CREATED);
@@ -523,7 +523,7 @@ public class MinescopeController {
         MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.checkTransparentSample(id);
         if (res == null || res2 == null) return ResponseEntity.notFound().build();
         else {
-            if (res2.getMineralId() != idMineral) return ResponseEntity.notFound().build();
+            if (res2.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentCa res3 = mineralSampleTransparentServiceCa.modifyTransparentSample(res2);
                 return ResponseEntity.ok(res3);}

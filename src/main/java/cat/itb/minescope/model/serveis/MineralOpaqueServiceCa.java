@@ -27,7 +27,7 @@ public class MineralOpaqueServiceCa {
 
     public MineralOpaqueCa modifyOpaqueMineral(MineralOpaqueCa mo){
         MineralOpaqueCa aux = null;
-        if(repository.existsById(mo.getIdMineral())){
+        if(repository.existsById(mo.getId())){
             aux= repository.save(mo);
         }
         return aux;
@@ -38,7 +38,7 @@ public class MineralOpaqueServiceCa {
         if(res!=null) {
             if (res.getOpaqueSamplesList() != null) {
                 for (int i = 0; i < res.getOpaqueSamplesList().size(); i++) {
-                    sampleOpaqueService.deleteOpaqueSample(res.getOpaqueSamplesList().get(i).getIdSample());
+                    sampleOpaqueService.deleteOpaqueSample(res.getOpaqueSamplesList().get(i).getId());
                 }
             }
             repository.deleteById(id);
