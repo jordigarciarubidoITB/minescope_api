@@ -10,22 +10,21 @@ public class MineralSampleOpaqueCa {
     @Id
     @GeneratedValue (generator = "mineralsampleopaque_sequence")
     @SequenceGenerator(name="mineralsampleopaque_sequence", sequenceName = "db_user_sequence", allocationSize = 1)
-    private int idSample;
-    private int idMineral;
+    private int id;
+    private int id_mineral;
+    private String lpna;
+    private String lpa;
     @Column(unique = true)
-    private String name;
-    private String imageLpna;
-    private String imageLpa;
-    private String coloration;
-    private String pleochroism;
-    private String abundance;
-    private String reflectance;
-    private String otherMinerals;
-    private String shape;
-    private String polishingCleavage;
-    //private String reflectivity;
-    private String polishingHardness;
-    private String anisotropism;
-    private String interferenceColors;
-    private String internalReflections;
+    private String nom;
+    private String coloracio;
+    private String pleocroisme;
+    private String abundancia;
+    private String altres_minerals;
+    private String forma;
+    private String exfoliacio_polit;
+    private String reflectivitat;
+    private String resistencia_polit;
+    private String anisotropia;
+    private String colors_interferencia;
+    private String reflexions_internes;
 }
