@@ -35,7 +35,7 @@ public class MinescopeController {
     @PostMapping("en/opaqueminerals")
     public ResponseEntity<?> createOpaqueMineralEn(@RequestBody MineralOpaqueEn mo){
         MineralOpaqueEn res = mineralOpaqueEn.addOpaqueMineral(mo);
-        return new ResponseEntity<MineralOpaqueEn>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("en/opaqueminerals/{idMineral}")
@@ -82,7 +82,7 @@ public class MinescopeController {
             if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueEn res3 = mineralSampleOpaqueEn.addOpaqueSample(mso);
-                return new ResponseEntity<MineralSampleOpaqueEn>(res3, HttpStatus.CREATED);
+                return new ResponseEntity<>(res3, HttpStatus.CREATED);
             }
         }
     }
@@ -121,7 +121,7 @@ public class MinescopeController {
     @PostMapping("sp/opaqueminerals")
     public ResponseEntity<?> createOpaqueMineralSp(@RequestBody MineralOpaqueSp mo){
         MineralOpaqueSp res = mineralOpaqueSp.addOpaqueMineral(mo);
-        return new ResponseEntity<MineralOpaqueSp>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("sp/opaqueminerals/{idMineral}")
@@ -168,7 +168,7 @@ public class MinescopeController {
             if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueSp res3 = mineralSampleOpaqueSp.addOpaqueSample(mso);
-                return new ResponseEntity<MineralSampleOpaqueSp>(res3, HttpStatus.CREATED);
+                return new ResponseEntity<>(res3, HttpStatus.CREATED);
             }
         }
     }
@@ -207,7 +207,7 @@ public class MinescopeController {
     @PostMapping("ca/opaqueminerals")
     public ResponseEntity<?> createOpaqueMineralCa(@RequestBody MineralOpaqueCa mo){
         MineralOpaqueCa res = mineralOpaqueCa.addOpaqueMineral(mo);
-        return new ResponseEntity<MineralOpaqueCa>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("ca/opaqueminerals/{idMineral}")
@@ -254,7 +254,7 @@ public class MinescopeController {
             if (mso.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleOpaqueCa res3 = mineralSampleOpaqueCa.addOpaqueSample(mso);
-                return new ResponseEntity<MineralSampleOpaqueCa>(res3, HttpStatus.CREATED);
+                return new ResponseEntity<>(res3, HttpStatus.CREATED);
             }
         }
     }
@@ -300,7 +300,7 @@ public class MinescopeController {
     @PostMapping("en/transparentminerals")
     public ResponseEntity<?> createTransparentMineralEn(@RequestBody MineralTransparentEn newMineral){
         MineralTransparentEn res = mineralTransparentServiceEn.addTransparentMinerals(newMineral);
-        return new ResponseEntity<MineralTransparentEn>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("en/transparentminerals/{id}")
@@ -340,7 +340,7 @@ public class MinescopeController {
             if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentEn res2 = mineralSampleTransparentServiceEn.addTransparentSample(newSample);
-                return new ResponseEntity<MineralSampleTransparentEn>(res2, HttpStatus.CREATED);
+                return new ResponseEntity<>(res2, HttpStatus.CREATED);
             }
         }
     }
@@ -386,7 +386,7 @@ public class MinescopeController {
     @PostMapping("sp/transparentminerals")
     public ResponseEntity<?> createTransparentMineralSp(@RequestBody MineralTransparentSp newMineral){
         MineralTransparentSp res = mineralTransparentServiceSp.addTransparentMinerals(newMineral);
-        return new ResponseEntity<MineralTransparentSp>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("sp/transparentminerals/{id}")
@@ -426,7 +426,7 @@ public class MinescopeController {
             if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentSp res2 = mineralSampleTransparentServiceSp.addTransparentSample(newSample);
-                return new ResponseEntity<MineralSampleTransparentSp>(res2, HttpStatus.CREATED);
+                return new ResponseEntity<>(res2, HttpStatus.CREATED);
             }
         }
     }
@@ -472,7 +472,7 @@ public class MinescopeController {
     @PostMapping("ca/transparentminerals")
     public ResponseEntity<?> createTransparentMineralCa(@RequestBody MineralTransparentCa newMineral){
         MineralTransparentCa res = mineralTransparentServiceCa.addTransparentMinerals(newMineral);
-        return new ResponseEntity<MineralTransparentCa>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("ca/transparentminerals/{id}")
@@ -512,7 +512,7 @@ public class MinescopeController {
             if (newSample.getId_mineral() != idMineral) return ResponseEntity.notFound().build();
             else {
                 MineralSampleTransparentCa res2 = mineralSampleTransparentServiceCa.addTransparentSample(newSample);
-                return new ResponseEntity<MineralSampleTransparentCa>(res2, HttpStatus.CREATED);
+                return new ResponseEntity<>(res2, HttpStatus.CREATED);
             }
         }
     }
