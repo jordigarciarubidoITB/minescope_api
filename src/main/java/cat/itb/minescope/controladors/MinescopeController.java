@@ -540,4 +540,43 @@ public class MinescopeController {
             else return ResponseEntity.noContent().build();
         }
     }
+
+
+    // ALL OPAQUE SAMPLES EN
+    @GetMapping("en/opaquesamples")
+    public ResponseEntity<?> listAllOpaqueSamplesEn() {
+        if (mineralSampleOpaqueEn.listOpaqueSamples() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleOpaqueEn.listOpaqueSamples());
+    }
+    // ALL OPAQUE SAMPLES SP
+    @GetMapping("sp/opaquesamples")
+    public ResponseEntity<?> listAllOpaqueSamplesSp() {
+        if (mineralSampleOpaqueSp.listOpaqueSamples() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleOpaqueSp.listOpaqueSamples());
+    }
+    // ALL OPAQUE SAMPLES CA
+    @GetMapping("ca/opaquesamples")
+    public ResponseEntity<?> listAllOpaqueSamplesCa() {
+        if (mineralSampleOpaqueCa.listOpaqueSamples() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleOpaqueCa.listOpaqueSamples());
+    }
+
+    // ALL TRANSPARENT SAMPLES EN
+    @GetMapping("en/transparentminerals")
+    public ResponseEntity<?> listAllTransparentSamplesEn() {
+        if (mineralSampleTransparentServiceEn.listTransparentSample() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleTransparentServiceEn.listTransparentSample());
+    }
+    // ALL TRANSPARENT SAMPLES SP
+    @GetMapping("sp/transparentminerals")
+    public ResponseEntity<?> listAllTransparentSamplesSp() {
+        if (mineralSampleTransparentServiceSp.listTransparentSample() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleTransparentServiceSp.listTransparentSample());
+    }
+    // ALL TRANSPARENT SAMPLES CA
+    @GetMapping("ca/transparentminerals")
+    public ResponseEntity<?> listAllTransparentSamplesCa() {
+        if (mineralSampleTransparentServiceCa.listTransparentSample() == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(mineralSampleTransparentServiceCa.listTransparentSample());
+    }
 }
