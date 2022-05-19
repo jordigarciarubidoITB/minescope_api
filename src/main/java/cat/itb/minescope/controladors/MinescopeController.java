@@ -562,19 +562,19 @@ public class MinescopeController {
     }
 
     // ALL TRANSPARENT SAMPLES EN
-    @GetMapping("en/transparentminerals")
+    @GetMapping("en/transparentsamples")
     public ResponseEntity<?> listAllTransparentSamplesEn() {
         if (mineralSampleTransparentServiceEn.listTransparentSample() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralSampleTransparentServiceEn.listTransparentSample());
     }
     // ALL TRANSPARENT SAMPLES SP
-    @GetMapping("sp/transparentminerals")
+    @GetMapping("sp/transparentsamples")
     public ResponseEntity<?> listAllTransparentSamplesSp() {
         if (mineralSampleTransparentServiceSp.listTransparentSample() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralSampleTransparentServiceSp.listTransparentSample());
     }
     // ALL TRANSPARENT SAMPLES CA
-    @GetMapping("ca/transparentminerals")
+    @GetMapping("ca/transparentsamples")
     public ResponseEntity<?> listAllTransparentSamplesCa() {
         if (mineralSampleTransparentServiceCa.listTransparentSample() == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(mineralSampleTransparentServiceCa.listTransparentSample());
